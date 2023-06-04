@@ -73,5 +73,3 @@ const Nuxtify = new NuxtifyApi(
 );
 
 export default Nuxtify;
-
-Nuxtify.getHome().then((data) => console.log(data));
