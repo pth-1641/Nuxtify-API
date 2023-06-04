@@ -216,13 +216,9 @@ Nuxtify.search.getPodcastDetail('Z6AFI0IZ');
 Nuxtify.search.getPodcastCategories();
 ```
 
-### _Podcast Categories_
-
-```javascript
-Nuxtify.search.getPodcastCategories();
-```
-
 ### _Podcast By Genres_
+
+> genreId: string
 
 ```javascript
 Nuxtify.search.getPodcastByGenre('IWZ980AI');
