@@ -72,4 +72,4 @@ const Nuxtify = new NuxtifyApi(
   'acOrvUS15XRW2o9JksiK1KgQ6Vbds8ZW'
 );
 
-export default Nuxtify;
+export { Nuxtify };

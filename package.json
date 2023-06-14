@@ -1,17 +1,27 @@
 {
   "name": "nuxtify-api",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Lightweight music API for client without third-party libraries.",
-  "main": "index.ts",
-  "repository": "https://github.com/pth-1641/Nuxtify-API",
+  "main": "dist",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "repository": {
+    "url": "https://github.com/pth-1641/Nuxtify-API",
+    "type": "git"
+  },
   "homepage": "https://github.com/pth-1641/Nuxtify-API",
   "keywords": [
     "api",
     "nuxtify"
   ],
-  "author": "pth-1641",
+  "author": {
+    "name": "pth-1641",
+    "email": "pth16042001@gmail.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.2.3"
-  }
+  },
+  "dependencies": {}
 }

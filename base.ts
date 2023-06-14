@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import {createHash, createHmac} from 'crypto';
 const baseURL = 'https://zingmp3.vn';
 
 export class Base {
@@ -15,11 +15,11 @@ export class Base {
   }
 
   private createHash256(params: string): string {
-    return crypto.createHash('sha256').update(params).digest('hex');
+    return createHash('sha256').update(params).digest('hex');
   }
 
   private createHmac512(str: string, key: string): string {
-    const hmac = crypto.createHmac('sha512', key);
+    const hmac = createHmac('sha512', key);
     return hmac.update(str).digest('hex');
   }
 

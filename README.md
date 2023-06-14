@@ -2,6 +2,8 @@
 
 Lightweight music API for client without third-party libraries.
 
+## ⚠️ API from [ZingMP3](https://zingmp3.vn)
+
 ## Installation
 
 ```bash
@@ -11,9 +13,9 @@ yarn add nuxtify-api
 ```
 
 ```bash
-import Nuxtify from "nuxtify-api"
+import { Nuxtify } from "nuxtify-api"
 #or
-const Nuxtify = require("nuxtify-api")
+const { Nuxtify } = require("nuxtify-api")
 ```
 
 ## Usage
