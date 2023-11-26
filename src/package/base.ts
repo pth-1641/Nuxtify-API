@@ -1,17 +1,18 @@
-import {createHash, createHmac} from 'crypto';
+//@ts-ignore
+import { createHash, createHmac } from 'crypto';
 const baseURL = 'https://zingmp3.vn';
 
 export class Base {
-  private version: string;
-  private ctime: string;
-  private secretKey: string;
-  private apiKey: string;
+  private readonly version: string;
+  private readonly ctime: string;
+  private readonly secretKey: string;
+  private readonly apiKey: string;
 
-  constructor(apiKey: string, secretKey: string) {
+  constructor(apiKey?: string, secretKey?: string) {
     this.version = '0'; // Default 0
     this.ctime = '0'; // Default 0
-    this.secretKey = secretKey;
-    this.apiKey = apiKey;
+    this.secretKey = secretKey || 'acOrvUS15XRW2o9JksiK1KgQ6Vbds8ZW';
+    this.apiKey = apiKey || 'X5BM3w8N7MKozC0B85o4KMlzLZKhV00y';
   }
 
   private createHash256(params: string): string {
@@ -26,8 +27,8 @@ export class Base {
   private async getCookie(): Promise<any> {
     try {
       const res = await fetch(baseURL);
-      const cookie = res.headers.get('set-cookie')?.split('zmp3_rqid')[1];
-      return 'zmp3_rqid' + cookie;
+      const cookie = res.headers.getSetCookie().join(';');
+      return cookie;
     } catch (err) {
       throw err;
     }
@@ -58,7 +59,6 @@ export class Base {
   }
 
   // Create Signature //
-
   protected createHomeSig(path: string): string {
     return this.createHmac512(
       path +
@@ -69,11 +69,11 @@ export class Base {
     );
   }
 
-  protected createPodcastSig(path: string, id: string, page: number): string {
+  protected createPodcastSig(path: string, type: string): string {
     return this.createHmac512(
       path +
         this.createHash256(
-          `count=20ctime=${this.ctime}id=${id}page=${page}version=${this.version}`
+          `count=20ctime=${this.ctime}page=1type=${type}version=${this.version}`
         ),
       this.secretKey
     );
@@ -84,6 +84,16 @@ export class Base {
       path +
         this.createHash256(
           `count=20ctime=${this.ctime}page=${page}type=${type}version=${this.version}`
+        ),
+      this.secretKey
+    );
+  }
+
+  protected createCommentSig(path: string, id: string): string {
+    return this.createHmac512(
+      path +
+        this.createHash256(
+          `count=50ctime=${this.ctime}id=${id}version=${this.version}`
         ),
       this.secretKey
     );

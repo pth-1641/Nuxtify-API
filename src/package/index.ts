@@ -12,7 +12,7 @@ class NuxtifyApi extends Base {
   public video: Video;
   public chart: Chart;
 
-  constructor(apiKey: string, secretKey: string) {
+  constructor(apiKey?: string, secretKey?: string) {
     super(apiKey, secretKey);
     this.podcast = new Podcast(apiKey, secretKey);
     this.song = new Song(apiKey, secretKey);
@@ -24,20 +24,24 @@ class NuxtifyApi extends Base {
   public async getHome(): Promise<any> {
     try {
       const sig = this.createHomeSig('/api/v2/page/get/home');
-      return await this.createRequest('/api/v2/page/get/home', {
+      const res = await this.createRequest('/api/v2/page/get/home', {
         page: 1,
         count: 30,
         sig,
       });
-    } catch (error) {
-      throw error;
+      if (res.err) throw new Error(res.msg);
+      return res.data;
+    } catch (err) {
+      throw err;
     }
   }
 
   public async getTop100(): Promise<any> {
     try {
       const sig = this.createNoIdSig('/api/v2/page/get/top-100');
-      return await this.createRequest('/api/v2/page/get/top-100', { sig });
+      const res = await this.createRequest('/api/v2/page/get/top-100', { sig });
+      if (res.err) throw new Error(res.msg);
+      return res.data;
     } catch (err) {
       throw err;
     }
@@ -58,7 +62,21 @@ class NuxtifyApi extends Base {
   public async getGenres(): Promise<any> {
     try {
       const sig = this.createNoIdSig('/api/v2/page/get/hub-home');
-      return await this.createRequest('/api/v2/page/get/hub-home', {
+      const res = await this.createRequest('/api/v2/page/get/hub-home', {
+        sig,
+      });
+      if (res.err) throw new Error(res.msg);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  public async getPlaylist(playlistId: string): Promise<any> {
+    try {
+      const sig = this.createIdSig('/api/v2/page/get/playlist', playlistId);
+      return await this.createRequest('/api/v2/page/get/playlist', {
+        id: playlistId,
         sig,
       });
     } catch (err) {
@@ -67,9 +85,6 @@ class NuxtifyApi extends Base {
   }
 }
 
-const Nuxtify = new NuxtifyApi(
-  'X5BM3w8N7MKozC0B85o4KMlzLZKhV00y',
-  'acOrvUS15XRW2o9JksiK1KgQ6Vbds8ZW'
-);
+const Nuxtify = new NuxtifyApi();
 
-export { Nuxtify };
+export default Nuxtify;

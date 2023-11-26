@@ -2,10 +2,10 @@
   "name": "nuxtify-api",
   "version": "2.0.3",
   "description": "Lightweight music API for client without third-party libraries.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.ts",
   "scripts": {
-    "build": "npx tsc"
+    "build": "npx tsc ./*.ts --outDir dist",
+    "test": "ts-node test.ts"
   },
   "repository": {
     "url": "https://github.com/pth-1641/Nuxtify-API",
@@ -14,14 +14,17 @@
   "homepage": "https://github.com/pth-1641/Nuxtify-API",
   "keywords": [
     "api",
-    "nuxtify"
+    "nuxtify",
+    "music",
+    "zingmp3",
+    "mp3"
   ],
   "author": {
     "name": "pth-1641",
     "email": "pth16042001@gmail.com"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.2.3"
+    "typescript": "^5.2.2"
   }
 }

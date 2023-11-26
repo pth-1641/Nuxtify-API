@@ -4,10 +4,12 @@ export class Video extends Base {
   public async getRelatedVideos(videoId: string): Promise<any> {
     try {
       const sig = this.createIdSig('/api/v2/video/get/section-relate', videoId);
-      return await this.createRequest('/api/v2/video/get/section-relate', {
+      const res = await this.createRequest('/api/v2/video/get/section-relate', {
         id: videoId,
         sig,
       });
+      if (res.err) throw new Error(res.msg);
+      return res.data;
     } catch (err) {
       throw err;
     }
@@ -16,10 +18,12 @@ export class Video extends Base {
   public async getVideoDetail(videoId: string): Promise<any> {
     try {
       const sig = this.createIdSig('/api/v2/page/get/video', videoId);
-      return await this.createRequest('/api/v2/page/get/video', {
+      const res = await this.createRequest('/api/v2/page/get/video', {
         id: videoId,
         sig,
       });
+      if (res.err) throw new Error(res.msg);
+      return res.data;
     } catch (err) {
       throw err;
     }

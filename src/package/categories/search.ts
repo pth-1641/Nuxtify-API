@@ -1,8 +1,15 @@
 import { Base } from '../base';
 
+type SearchType = {
+  q: string;
+  type: 'song' | 'playlist' | 'artist' | 'video';
+  page?: number;
+};
+
 export class Search extends Base {
   public async getResult(q: string): Promise<any> {
     try {
+      if (!q.trim()) throw new Error('Invalid query string');
       const sig = this.createNoIdSig('/api/v2/search/multi');
       return await this.createRequest('/api/v2/search/multi', {
         q,
@@ -13,12 +20,14 @@ export class Search extends Base {
     }
   }
 
-  public async getResultByType(
-    q: string,
-    type: 'song' | 'playlist' | 'artist' | 'video',
-    page: number = 1
-  ): Promise<any> {
+  public async getResultByType(params: SearchType): Promise<any> {
     try {
+      const { q, type, page = 1 } = params;
+      if (!q.trim()) throw new Error('Invalid query string');
+      if (!['song', 'playlist', 'artist', 'video'].includes(type)) {
+        throw new Error('Invalid type');
+      }
+
       const sig = this.createSearchSig('/api/v2/search', type, page);
       return await this.createRequest('/api/v2/search', {
         q,
