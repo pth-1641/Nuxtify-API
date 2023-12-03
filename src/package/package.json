@@ -4,8 +4,7 @@
   "description": "Lightweight music API for client without third-party libraries.",
   "main": "index.ts",
   "scripts": {
-    "build": "npx tsc ./*.ts --outDir dist",
-    "test": "ts-node test.ts"
+    "build": "npx tsc"
   },
   "repository": {
     "url": "https://github.com/pth-1641/Nuxtify-API",
@@ -26,5 +25,8 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

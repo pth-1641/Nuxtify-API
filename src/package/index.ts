@@ -87,4 +87,4 @@ class NuxtifyApi extends Base {
 
 const Nuxtify = new NuxtifyApi();
 
-export default Nuxtify;
+export { Nuxtify };

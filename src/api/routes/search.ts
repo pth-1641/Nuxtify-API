@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import Nuxtify from '../../package';
+import { Nuxtify } from '../../package';
 
 const router = Router();
 
@@ -33,10 +33,11 @@ enpoints.forEach(({ path, callback }) => {
 
 router.get('/type', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { q = '', type } = req.query as any;
+    const { q = '', type, page = 1 } = req.query as any;
     const data = await Nuxtify.search.getResultByType({
       q,
       type,
+      page,
     });
     if (data.err) throw new Error(data.msg);
     res.status(200).json(data.data);

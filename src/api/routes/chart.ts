@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import Nuxtify from '../../package';
+import { Nuxtify } from '../../package';
 
 const router = Router();
 

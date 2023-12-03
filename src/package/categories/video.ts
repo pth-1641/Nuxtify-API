@@ -15,7 +15,7 @@ export class Video extends Base {
     }
   }
 
-  public async getVideoDetail(videoId: string): Promise<any> {
+  public async getDetail(videoId: string): Promise<any> {
     try {
       const sig = this.createIdSig('/api/v2/page/get/video', videoId);
       const res = await this.createRequest('/api/v2/page/get/video', {

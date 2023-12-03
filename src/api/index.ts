@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
 import routes from './routes';
 import chart from './routes/chart';
@@ -8,6 +9,7 @@ import video from './routes/video';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+app.use(cors());
 
 // Routes
 app.use('/video', video);
